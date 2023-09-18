@@ -4,7 +4,7 @@ const API_KEY = '18ad1afa22a39e3c497cf86bc3da3983';
 
 export const fetchLatestMovies = async (page, controller) => {
   const response = await axios.get(
-    `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}&language=en-US&page=${page}`,
+    `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US&page=${page}`,
     {
       signal: controller.signal,
     }
@@ -44,7 +44,6 @@ export const fetchMoviesByQuery = async (query, page, controller) => {
       signal: controller.signal,
     }
   );
-
   return {
     results: response.data.results,
     total_pages: response.data.total_pages,

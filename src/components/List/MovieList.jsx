@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { MovieListItem } from './MovieListItem';
 import { fetchLatestMovies, fetchMoviesByQuery } from 'js/api';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 export const MovieList = ({ listType }) => {
   const [searchParams] = useSearchParams();
@@ -12,6 +12,7 @@ export const MovieList = ({ listType }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [query, setQuery] = useState('');
+  const location = useLocation();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -74,7 +75,9 @@ export const MovieList = ({ listType }) => {
           className="list-none grid grid-cols-6 gap-y-3"
         >
           {movies.map(movie => {
-            return <MovieListItem key={movie.id} movie={movie} />;
+            return (
+              <MovieListItem key={movie.id} location={location} movie={movie} />
+            );
           })}
         </InfiniteScroll>
       ) : (
