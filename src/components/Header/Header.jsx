@@ -19,7 +19,7 @@ export const Header = () => {
           }
           to="/movies"
         >
-          Seacrh Movie
+          Search Movie
         </NavLink>
       </nav>
     </header>

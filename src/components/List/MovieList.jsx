@@ -13,6 +13,7 @@ export const MovieList = ({ listType }) => {
   const [hasMore, setHasMore] = useState(true);
   const [query, setQuery] = useState('');
   const location = useLocation();
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const controller = new AbortController();
@@ -31,6 +32,10 @@ export const MovieList = ({ listType }) => {
             page,
             controller
           );
+          if (!results.length) {
+            setMessage('No movies found. Please try another name');
+            return;
+          }
           setTotalPages(total_pages);
           setMovies(prev => [...prev, ...results]);
           setQuery(searchParams.get('query'));
@@ -39,6 +44,7 @@ export const MovieList = ({ listType }) => {
             page,
             controller
           );
+
           setTotalPages(total_pages);
           setMovies(prev => [...prev, ...results]);
         } else {
@@ -81,7 +87,7 @@ export const MovieList = ({ listType }) => {
           })}
         </InfiniteScroll>
       ) : (
-        ''
+        `${message}`
       )}
     </Container>
   );

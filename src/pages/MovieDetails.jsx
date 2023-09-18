@@ -34,42 +34,54 @@ const MovieDetails = () => {
         {errorStatus === 404 ? (
           <p className="pt-4">Details not found</p>
         ) : (
-          <div>
-            <div>
-              {!movie.poster_path ? (
-                <div className="w-[300px] h-[400px] text-center">No Image</div>
-              ) : (
-                <img
-                  className="w-[300px] h-[400px]"
-                  src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                  alt=""
-                />
-              )}
-            </div>
+          <>
+            <div className="flex gap-x-5 mb-2">
+              <div>
+                {!movie.poster_path ? (
+                  <div className="w-[300px] h-[400px] text-center">
+                    No Image
+                  </div>
+                ) : (
+                  <img
+                    className="w-[300px] h-[400px]"
+                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                    alt=""
+                  />
+                )}
+              </div>
 
-            <p>{movie.title}</p>
-            <p>{movie.release_date}</p>
-            <p>User Score: {movie.vote_average}</p>
-            <p>Overview: {movie.overview}</p>
-            <ul className="flex gap-5">
-              Genres
-              {movie.genres &&
-                movie.genres.map(genre => {
-                  return <li key={genre.id}>{genre.name}</li>;
-                })}
-            </ul>
-            <ul>
-              <li>
-                <Link to="cast">See cast</Link>
-              </li>
-              <li>
-                <Link to="reviews">See reviews</Link>
-              </li>
-            </ul>
+              <div className="flex flex-col gap-3">
+                <p className="font-bold">
+                  {movie.title} ({new Date(movie.release_date).getFullYear()})
+                </p>
+                <p>
+                  <span className="font-bold">User Score:</span>{' '}
+                  {movie.vote_average}
+                </p>
+                <p>
+                  <span className="font-bold">Overview:</span> {movie.overview}
+                </p>
+                <ul className="flex gap-3">
+                  <span className="font-bold">Genres:</span>
+                  {movie.genres &&
+                    movie.genres.map(genre => {
+                      return <li key={genre.id}>{genre.name}</li>;
+                    })}
+                </ul>
+                <ul className="flex gap-3">
+                  <li>
+                    <Link to="cast">See cast</Link>
+                  </li>
+                  <li>
+                    <Link to="reviews">See reviews</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <div>
               <Outlet />
             </div>
-          </div>
+          </>
         )}
       </Container>
     </>

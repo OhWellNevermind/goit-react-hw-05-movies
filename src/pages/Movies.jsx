@@ -13,20 +13,24 @@ const Movies = () => {
       <form
         onSubmit={evt => {
           evt.preventDefault();
-          setSearchParams({ query: evt.currentTarget.elements.query.value });
+          setSearchParams({
+            query: evt.currentTarget.elements.query.value.trim(),
+          });
         }}
       >
         <input
           name="query"
-          className="border-[black] border-[1px] p-1"
+          className="border-[black] border-[1px] p-1 rounded-md"
           type="text"
-          placeholder="Search"
-          //   onChange={e => setSearchParams({ query: e.target.value })}
-          //   value={searchParams.get('query') ?? ''}
+          placeholder="Enter movie name"
         />
-        <button type="submit">Search</button>
+        <button
+          type="submit"
+          className="ml-3  px-2 py-2 rounded-md hover:bg-[orange] hover:text-[#fff]"
+        >
+          Search
+        </button>
       </form>
-      {/* {movies.length ? <MovieList listType="search" /> : ''} */}
       <MovieList listType="search" />
     </Container>
   );

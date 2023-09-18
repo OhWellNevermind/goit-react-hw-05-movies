@@ -39,7 +39,6 @@ const MovieCast = () => {
             </li>
           );
         })}
-        and others...
       </ul>
     </section>
   );
